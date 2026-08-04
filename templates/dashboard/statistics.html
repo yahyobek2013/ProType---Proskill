@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Statistika - ProType{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto space-y-8 animate-fadeIn">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-xl">
+    <div class="flex items-center gap-4">
+      <div class="p-3.5 rounded-2xl bg-teal-500/20 text-teal-400 border border-teal-500/30 shadow-lg shadow-teal-500/10">
+        <i data-lucide="bar-chart-3" class="w-7 h-7"></i>
+      </div>
+      <div>
+        <h1 class="text-2xl font-black text-white">Shaxsiy Statistika</h1>
+        <p class="text-xs text-slate-400">Yozish tezligingiz, aniqligingiz va barcha testlar dinamikasi</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+    <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+      <span class="text-xs font-bold text-slate-400 block mb-1">Jami Testlar</span>
+      <strong class="text-3xl font-black text-white font-mono">{{ total_tests }}</strong>
+    </div>
+    <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+      <span class="text-xs font-bold text-indigo-400 block mb-1">O'rtacha WPM</span>
+      <strong class="text-3xl font-black text-indigo-400 font-mono">{{ avg_wpm }}</strong>
+    </div>
+    <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+      <span class="text-xs font-bold text-emerald-400 block mb-1">O'rtacha Aniqlik</span>
+      <strong class="text-3xl font-black text-emerald-400 font-mono">{{ avg_accuracy }}%</strong>
+    </div>
+    <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+      <span class="text-xs font-bold text-amber-400 block mb-1">Maksimal WPM</span>
+      <strong class="text-3xl font-black text-amber-400 font-mono">{{ max_wpm }}</strong>
+    </div>
+  </div>
+
+  <!-- Recent Tests Table -->
+  <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-4">
+    <h3 class="font-bold text-white text-base">So'nggi Natijalar Tahlili</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead class="bg-slate-950 text-slate-400 font-mono border-b border-slate-800">
+          <tr>
+            <th class="p-3">Sana</th>
+            <th class="p-3">Test Turi</th>
+            <th class="p-3">WPM</th>
+            <th class="p-3">CPM</th>
+            <th class="p-3">Aniqlik</th>
+            <th class="p-3">Xatolar</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-800">
+          {% for test in user_tests %}
+            <tr class="hover:bg-slate-800/40">
+              <td class="p-3 font-mono text-slate-400">{{ test.date }}</td>
+              <td class="p-3 font-bold text-white">{{ test.get_test_type_display }}</td>
+              <td class="p-3 font-mono font-bold text-indigo-400">{{ test.wpm }} WPM</td>
+              <td class="p-3 font-mono text-slate-300">{{ test.cpm }} CPM</td>
+              <td class="p-3 font-mono text-emerald-400">{{ test.accuracy }}%</td>
+              <td class="p-3 font-mono text-rose-400">{{ test.errors }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="6" class="p-8 text-center text-slate-500 text-xs">Hali hech qanday test topshirilmagan.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

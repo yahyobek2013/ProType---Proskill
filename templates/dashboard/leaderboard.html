@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Reyting - ProType{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto space-y-8 animate-fadeIn">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-xl">
+    <div class="flex items-center gap-4">
+      <div class="p-3.5 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/30 shadow-lg shadow-rose-500/10">
+        <i data-lucide="medal" class="w-7 h-7"></i>
+      </div>
+      <div>
+        <h1 class="text-2xl font-black text-white">Platforma Reytingi</h1>
+        <p class="text-xs text-slate-400">Eng tezkor klaviatura ustalari va Top-100 peshqadamlar ro'yxati</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaderboard Table -->
+  <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead class="bg-slate-950 text-slate-400 uppercase font-mono border-b border-slate-800">
+          <tr>
+            <th class="p-4">O'rin</th>
+            <th class="p-4">Foydalanuvchi</th>
+            <th class="p-4">Reyting Balli</th>
+            <th class="p-4">Maks WPM</th>
+            <th class="p-4">O'rtacha Aniqlik</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-800/60">
+          {% for u in users %}
+            <tr class="hover:bg-slate-800/40 transition-colors">
+              <td class="p-4 font-black font-mono {% if forloop.counter == 1 %}text-amber-400 text-sm{% elif forloop.counter == 2 %}text-slate-300 text-sm{% elif forloop.counter == 3 %}text-amber-600 text-sm{% else %}text-slate-500{% endif %}">
+                #{{ forloop.counter }}
+              </td>
+              <td class="p-4 flex items-center gap-3">
+                <img src="{{ u.get_avatar_url }}" alt="{{ u.full_name }}" class="w-9 h-9 rounded-xl object-cover bg-slate-800 ring-2 ring-slate-800">
+                <div>
+                  <strong class="text-white text-sm block">{{ u.full_name }}</strong>
+                  <span class="text-[10px] text-slate-400 font-mono">@{{ u.login }}</span>
+                </div>
+              </td>
+              <td class="p-4 font-mono font-bold text-amber-400">{{ u.rating }} PTS</td>
+              <td class="p-4 font-mono font-bold text-indigo-400">{{ u.wpm_max }} WPM</td>
+              <td class="p-4 font-mono text-emerald-400">{{ u.accuracy_avg|floatformat:1 }}%</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

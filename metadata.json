@@ -1,0 +1,6 @@
+{
+  "name": "Pro Type",
+  "description": "AI bilan ta'minlangan professional klaviatura bosish va tez yozish platformasi",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

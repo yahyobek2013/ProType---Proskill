@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Musobaqalar - ProType{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto space-y-8 animate-fadeIn">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-xl">
+    <div class="flex items-center gap-4">
+      <div class="p-3.5 rounded-2xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 shadow-lg shadow-cyan-500/10">
+        <i data-lucide="trophy" class="w-7 h-7"></i>
+      </div>
+      <div>
+        <h1 class="text-2xl font-black text-white">Rasmiy Musobaqalar</h1>
+        <p class="text-xs text-slate-400">Sovrinli va reytingli klaviatura turnirlarida ishtirok eting</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Active Competitions -->
+  <div class="space-y-4">
+    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+      <i data-lucide="flame" class="w-5 h-5 text-amber-400"></i>
+      <span>Aktiv Musobaqalar</span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {% if active_competitions %}
+        {% for comp in active_competitions %}
+          <div class="p-6 rounded-3xl bg-gradient-to-br from-indigo-950/80 to-slate-900 border border-indigo-500/40 shadow-xl space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 uppercase">
+                Aktiv Turnir
+              </span>
+              <span class="text-xs font-mono text-slate-400">{{ comp.duration }} soniya</span>
+            </div>
+
+            <div>
+              <h3 class="text-xl font-black text-white">{{ comp.title }}</h3>
+              <p class="text-xs text-slate-400 mt-1 line-clamp-2">{{ comp.description }}</p>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-slate-800">
+              <span class="text-xs font-mono font-bold text-amber-400">+{{ comp.reward_points }} PTS</span>
+              <a href="{% url 'projects:detail' comp.id %}" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/30">
+                Ishtirok Etish
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-span-2 p-8 rounded-2xl bg-slate-900/60 border border-slate-800 text-center text-slate-500 text-xs">
+          Hozirda faol musobaqa mavjud emas. Tez orada yangi turnir e'lon qilinadi!
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}

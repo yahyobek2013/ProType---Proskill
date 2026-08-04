@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}Bosh Sahifa - ProType{% endblock %}
+
+{% block content %}
+<div class="space-y-8 animate-fadeIn">
+
+  <!-- Hero Section -->
+  <div class="relative bg-slate-900/90 border border-slate-800 rounded-3xl p-8 sm:p-12 overflow-hidden shadow-2xl backdrop-blur-xl">
+    <div class="relative z-10 max-w-2xl space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-bold uppercase tracking-wider">
+        <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+        <span>Pro Keyboard Master Platform</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+        Klaviatura Tezligi va <span class="bg-gradient-to-r from-indigo-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">Kiber Mahorat</span>
+      </h1>
+      <p class="text-slate-400 text-sm leading-relaxed">
+        Rasmiy sertifikatlar, onlayn tezkor duel va sovrinli musobaqalar. Ozbekistonning eng kuchli klaviatura ustalari davrasiga qo'shiling!
+      </p>
+      
+      <div class="flex flex-wrap gap-4 pt-2">
+        <a href="{% url 'dashboard:practice' %}" class="px-6 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-xl shadow-indigo-600/30 flex items-center gap-2 transition-all hover:scale-105">
+          <i data-lucide="keyboard" class="w-5 h-5"></i>
+          <span>Mashq Boshlash</span>
+        </a>
+        <a href="{% url 'dashboard:battle' %}" class="px-6 py-3.5 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-sm shadow-xl shadow-amber-600/30 flex items-center gap-2 transition-all hover:scale-105">
+          <i data-lucide="swords" class="w-5 h-5"></i>
+          <span>Onlayn Jang</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Platform Cards Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    
+    <a href="{% url 'dashboard:practice' %}" class="group p-6 rounded-3xl bg-gradient-to-br from-indigo-950/60 to-slate-900 border border-indigo-800/80 hover:border-indigo-500 transition-all shadow-xl hover:-translate-y-1">
+      <div class="flex items-center justify-between mb-4">
+        <div class="p-3 rounded-2xl bg-indigo-600/20 text-indigo-400 border border-indigo-500/30">
+          <i data-lucide="keyboard" class="w-6 h-6"></i>
+        </div>
+        <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-indigo-500/20 text-indigo-300">Mashq</span>
+      </div>
+      <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">Tezkor Mashq</h3>
+      <p class="text-xs text-slate-400 mt-2 leading-relaxed">Har qanday qiyinlikdagi va tildagi matnlar ustida klaviatura mashqlarini bajaring.</p>
+    </a>
+
+    <a href="{% url 'dashboard:battle' %}" class="group p-6 rounded-3xl bg-gradient-to-br from-amber-950/60 to-slate-900 border border-amber-800/80 hover:border-amber-500 transition-all shadow-xl hover:-translate-y-1">
+      <div class="flex items-center justify-between mb-4">
+        <div class="p-3 rounded-2xl bg-amber-600/20 text-amber-400 border border-amber-500/30">
+          <i data-lucide="swords" class="w-6 h-6"></i>
+        </div>
+        <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300">Jonli Duel</span>
+      </div>
+      <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition-colors">Onlayn Tezlik Jangi</h3>
+      <p class="text-xs text-slate-400 mt-2 leading-relaxed">Real vaqtda boshqa foydalanuvchilar bilan duelga chiqing va reyting ballarini oling.</p>
+    </a>
+
+    <a href="{% url 'projects:list' %}" class="group p-6 rounded-3xl bg-gradient-to-br from-cyan-950/60 to-slate-900 border border-cyan-800/80 hover:border-cyan-500 transition-all shadow-xl hover:-translate-y-1">
+      <div class="flex items-center justify-between mb-4">
+        <div class="p-3 rounded-2xl bg-cyan-600/20 text-cyan-400 border border-cyan-500/30">
+          <i data-lucide="trophy" class="w-6 h-6"></i>
+        </div>
+        <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-cyan-500/20 text-cyan-300">Sovrinli</span>
+      </div>
+      <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Rasmiy Musobaqalar</h3>
+      <p class="text-xs text-slate-400 mt-2 leading-relaxed">Haftalik va oylik sovrinli musobaqalarda qatnashib reyting va nishonlar yuting.</p>
+    </a>
+
+  </div>
+
+  <!-- Top Typists Section -->
+  <div class="bg-slate-900/90 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-2xl space-y-6">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="p-3 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/30">
+          <i data-lucide="medal" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h2 class="text-xl font-black text-white">Top Typistlar</h2>
+          <p class="text-xs text-slate-400">Platformadagi eng yuqori natijaga ega foydalanuvchilar</p>
+        </div>
+      </div>
+      <a href="{% url 'dashboard:leaderboard' %}" class="text-xs font-bold text-indigo-400 hover:underline flex items-center gap-1">
+        <span>Barchasini ko'rish</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {% for u in top_typists %}
+        <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 flex items-center gap-4">
+          <img src="{{ u.get_avatar_url }}" alt="{{ u.full_name }}" class="w-12 h-12 rounded-xl object-cover ring-2 ring-indigo-500/30 bg-slate-800">
+          <div>
+            <h4 class="font-bold text-white text-sm">{{ u.full_name }}</h4>
+            <p class="text-xs text-indigo-400 font-mono font-bold">{{ u.wpm_max }} WPM • {{ u.rating }} PTS</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}

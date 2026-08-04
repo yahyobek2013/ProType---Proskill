@@ -1,0 +1,42 @@
+/* certificate_export.css - Standalone Export-Safe CSS for PDF and Image rendering */
+/* Strictly hex, rgb, rgba, and hsl colors. No oklch(), lab(), lch(), color-mix() */
+
+.certificate-export-canvas {
+  box-sizing: border-box !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+  background-color: #090d16 !important;
+  color: #f8fafc !important;
+}
+
+.certificate-export-card {
+  background: linear-gradient(180deg, #0f172a 0%, #020617 50%, #0f172a 100%) !important;
+  border: 8px solid rgba(245, 158, 11, 0.6) !important;
+  border-radius: 24px !important;
+  color: #f8fafc !important;
+}
+
+.certificate-export-gold-text {
+  color: #fcd34d !important;
+}
+
+.certificate-export-amber-text {
+  color: #f59e0b !important;
+}
+
+.certificate-export-cyan-text {
+  color: #38bdf8 !important;
+}
+
+.certificate-export-emerald-text {
+  color: #10b981 !important;
+}
+
+.certificate-export-rose-text {
+  color: #f43f5e !important;
+}
+
+.certificate-export-stat-box {
+  background-color: rgba(2, 6, 23, 0.85) !important;
+  border: 1px solid rgba(245, 158, 11, 0.3) !important;
+  border-radius: 16px !important;
+}

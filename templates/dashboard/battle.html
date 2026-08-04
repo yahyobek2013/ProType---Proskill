@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block title %}Jang - ProType{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto space-y-8 animate-fadeIn">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-xl">
+    <div class="flex items-center gap-4">
+      <div class="p-3.5 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 shadow-lg shadow-amber-500/10">
+        <i data-lucide="swords" class="w-7 h-7"></i>
+      </div>
+      <div>
+        <h1 class="text-2xl font-black text-white">Onlayn Tezlik Jangi</h1>
+        <p class="text-xs text-slate-400">Real vaqtda raqiblar bilan 30 soniyalik tezlik duelida bellashing</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arena Container -->
+  <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl space-y-8">
+    
+    <!-- Players VS Panel -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
+      <!-- Player 1 -->
+      <div class="p-6 rounded-2xl bg-slate-950 border border-indigo-500/30 space-y-3">
+        <div class="flex items-center gap-3">
+          <img src="{{ user.get_avatar_url }}" alt="{{ user.full_name }}" class="w-12 h-12 rounded-xl object-cover ring-2 ring-indigo-500/40 bg-slate-800">
+          <div>
+            <h3 class="font-bold text-white text-sm">{{ user.full_name }} (Siz)</h3>
+            <span class="text-xs font-mono text-indigo-400 font-bold">{{ user.rating }} PTS</span>
+          </div>
+        </div>
+        <div class="space-y-1">
+          <div class="flex justify-between text-xs font-mono text-slate-400">
+            <span>Progress: <strong class="text-white" id="p1-progress">0%</strong></span>
+            <span>Tezlik: <strong class="text-indigo-400" id="p1-wpm">0 WPM</strong></span>
+          </div>
+          <div class="w-full h-3 rounded-full bg-slate-800 overflow-hidden">
+            <div id="p1-bar" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VS Badge -->
+      <div class="hidden sm:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-amber-500 text-slate-950 font-black items-center justify-center text-xs shadow-lg shadow-amber-500/40 z-10 border-2 border-slate-900">
+        VS
+      </div>
+
+      <!-- Player 2 (Opponent) -->
+      <div class="p-6 rounded-2xl bg-slate-950 border border-amber-500/30 space-y-3">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 font-bold text-xs border border-slate-700">
+            <i data-lucide="bot" class="w-6 h-6 text-amber-400"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-white text-sm">Onlayn Raqib (Bot Master)</h3>
+            <span class="text-xs font-mono text-amber-400 font-bold">1250 PTS</span>
+          </div>
+        </div>
+        <div class="space-y-1">
+          <div class="flex justify-between text-xs font-mono text-slate-400">
+            <span>Progress: <strong class="text-white" id="p2-progress">0%</strong></span>
+            <span>Tezlik: <strong class="text-amber-400" id="p2-wpm">0 WPM</strong></span>
+          </div>
+          <div class="w-full h-3 rounded-full bg-slate-800 overflow-hidden">
+            <div id="p2-bar" class="h-full bg-amber-500 transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Battle Typing Box -->
+    <div class="space-y-4">
+      <div class="p-6 bg-slate-950 rounded-2xl border border-slate-800 text-base font-mono text-slate-300 leading-relaxed min-h-[120px]" id="battle-text">
+        Klaviatura tezligi kiber sportning eng muhim ko'nikmalaridan biridir. Har bir harf va so'zni tez hamda aniq yozish orqali siz yuqori reyting ballariga ega bo'lasiz.
+      </div>
+      <input type="text" id="battle-input" placeholder="Jangni boshlash uchun shu yerga yozing..." class="w-full px-6 py-4 rounded-2xl bg-slate-950 border-2 border-amber-500/50 focus:border-amber-400 text-white font-mono text-base focus:outline-none">
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const text = document.getElementById('battle-text').innerText.trim();
+  const input = document.getElementById('battle-input');
+  const p1Bar = document.getElementById('p1-bar');
+  const p1Progress = document.getElementById('p1-progress');
+  const p1Wpm = document.getElementById('p1-wpm');
+
+  const p2Bar = document.getElementById('p2-bar');
+  const p2Progress = document.getElementById('p2-progress');
+  const p2Wpm = document.getElementById('p2-wpm');
+
+  let botProgress = 0;
+  let botInterval = null;
+
+  input.addEventListener('input', () => {
+    const val = input.value;
+    const pct = Math.min(100, Math.round((val.length / text.length) * 100));
+    p1Bar.style.width = pct + '%';
+    p1Progress.innerText = pct + '%';
+    p1Wpm.innerText = Math.round(val.length / 5 * 2) + ' WPM';
+
+    if (!botInterval && val.length > 0) {
+      botInterval = setInterval(() => {
+        botProgress = Math.min(100, botProgress + 4);
+        p2Bar.style.width = botProgress + '%';
+        p2Progress.innerText = botProgress + '%';
+        p2Wpm.innerText = Math.round(botProgress * 0.9) + ' WPM';
+
+        if (botProgress >= 100 && pct < 100) {
+          clearInterval(botInterval);
+          alert('Afsuski, Raqib birinchi marraga yetib keldi!');
+        }
+      }, 1000);
+    }
+
+    if (pct >= 100) {
+      clearInterval(botInterval);
+      confetti({ particleCount: 120, spread: 80 });
+      alert('G\'alaba! Siz raqibni mag\'lub etdingiz va +25 Reyting ballini qo\'lga kiritdingiz!');
+    }
+  });
+</script>
+{% endblock %}

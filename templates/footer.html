@@ -1,0 +1,15 @@
+<footer class="border-t border-slate-800/80 bg-slate-950 py-8 text-center text-xs text-slate-500 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <div class="w-6 h-6 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-xs">P</div>
+      <span class="text-slate-300 font-bold">ProType Platformasi</span>
+      <span>&copy; 2026. Barcha huquqlar ximoyalangan.</span>
+    </div>
+    <div class="flex items-center gap-4 text-slate-400">
+      <a href="{% url 'dashboard:home' %}" class="hover:text-white transition-colors">Bosh sahifa</a>
+      <a href="{% url 'dashboard:practice' %}" class="hover:text-white transition-colors">Mashq</a>
+      <a href="{% url 'dashboard:battle' %}" class="hover:text-white transition-colors">Jang</a>
+      <a href="{% url 'projects:list' %}" class="hover:text-white transition-colors">Musobaqalar</a>
+    </div>
+  </div>
+</footer>
